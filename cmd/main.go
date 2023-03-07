@@ -3,10 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"strings"
-	"sync"
-
 	"github.com/aiviaio/go-binance/v2"
+	"strings"
 )
 
 func main() {
@@ -14,7 +12,6 @@ func main() {
 		apiKey    = "your api key"
 		secretKey = "your secret key"
 		ctx       = context.Background()
-		wg        sync.WaitGroup
 	)
 	ch := make(chan map[string]string)
 
@@ -55,7 +52,6 @@ func main() {
 		select {
 		case pair, ok := <-ch:
 			if !ok {
-				wg.Done()
 				return
 			}
 			for s, v := range pair {
